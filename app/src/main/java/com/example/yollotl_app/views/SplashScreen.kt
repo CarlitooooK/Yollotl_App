@@ -1,21 +1,24 @@
-package com.example.yollotl_app
+package com.example.yollotl_app.views
 
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.yollotl_app.R
 import com.example.yollotl_app.navigation.AppScreens
 import kotlinx.coroutines.delay
 
@@ -24,21 +27,26 @@ fun SplashScreen(navController: NavHostController) {
     LaunchedEffect(true) {
         delay(2500)
         navController.popBackStack()
-        navController.navigate(AppScreens.MainScreen.route)
+        navController.navigate(AppScreens.StartScreen.route)
     }
     Splash()
 }
 
 @Composable
 fun Splash() {
-    val color = Color(0xFFD9DADE);
+
     Column(
-        Modifier.fillMaxSize().background(Color(0xFFD9DADE)),
+        Modifier
+            .fillMaxSize()
+            .background(Color.White),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
 
-    ) {
-        Image(painterResource(R.drawable.logo), contentDescription = "Logo Yollotl")
+        ) {
+        Image(
+            painterResource(R.drawable.logo_yollotl), contentDescription = "Logo Yollotl",
+            Modifier.size(300.dp)
+        )
     }
 }
 

@@ -1,4 +1,4 @@
-package com.example.yollotl_app
+package com.example.yollotl_app.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
