@@ -23,10 +23,13 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import com.example.yollotl_app.navigation.AppScreens
 
 @Composable
-fun LoginView() {
+fun LoginView(navHostController: NavHostController) {
     Column(
         Modifier
             .fillMaxSize()
@@ -40,27 +43,27 @@ fun LoginView() {
             fontSize = 30.sp,
             textAlign = TextAlign.Center
         )
-        LogoImage()
-        ButtonLogin()
+        LogoImage(300.dp)
+        ButtonLogin(navHostController)
 
     }
 }
 
 @Composable
-fun LogoImage() {
+fun LogoImage(size: Dp) {
     Image(
         painter = painterResource(R.drawable.logo_yollotl),
         contentDescription = "Logo",
-        modifier = Modifier.size(300.dp)
+        modifier = Modifier.size(size)
     )
 
 }
 
 @Composable
-fun ButtonLogin() {
+fun ButtonLogin(navHostController: NavHostController) {
     Button(
         modifier = Modifier.height(62.dp).width(237.dp),
-        onClick = {}, shape = RoundedCornerShape(54.dp),
+        onClick = {navHostController.navigate(AppScreens.LoginScreen.route)}, shape = RoundedCornerShape(54.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF371B34), // Color de fondo más suave
             contentColor = Color.White,
@@ -76,5 +79,5 @@ fun ButtonLogin() {
 @Preview(showBackground = true)
 @Composable
 fun LoginViewPreview() {
-    LoginView()
+
 }
