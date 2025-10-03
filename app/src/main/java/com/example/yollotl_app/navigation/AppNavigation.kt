@@ -23,7 +23,7 @@ fun AppNavigation() {
         }
         composable(AppScreens.StartScreen.route
         ) {
-           LoginView()
+           LoginView(navController)
         }
         composable(AppScreens.LoginScreen.route
         ) {
