@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -62,9 +63,9 @@ fun LoginScreen() {
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
-
     val scrollState = rememberScrollState()
     val gradienColors = listOf(backgroundColor, Color.White)
+
     Column(
         Modifier
             .fillMaxSize()
@@ -75,12 +76,13 @@ fun LoginScreen() {
                     endY = 500.0f
                 )
             )
-            .verticalScroll(scrollState),
+            .verticalScroll(scrollState)
+            .imePadding()
+            .padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-
-
+        verticalArrangement = Arrangement.spacedBy(0.dp)
     ) {
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(100.dp))
         LogoImage(200.dp)
         TextInstruccions("\"Tu paz es tu superpoder.\nEmpecemos\"", 24.sp)
         Spacer(modifier = Modifier.height(10.dp))
@@ -89,7 +91,6 @@ fun LoginScreen() {
         TextField(
             value = user,
             onValueChange = { user = it },
-
             leadingIcon = { Icon(Icons.Filled.Person, contentDescription = "Icon User") },
             keyboardType = KeyboardType.Text,
             fontFamily = alegreyaFont
@@ -100,14 +101,12 @@ fun LoginScreen() {
         TextField(
             value = password,
             onValueChange = { password = it },
-
             leadingIcon = { Icon(Icons.Filled.Lock, contentDescription = "Lock Icon") },
             keyboardType = KeyboardType.Text,
             fontFamily = alegreyaFont,
-
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                val iconId = if (passwordVisible) R.drawable.ic_open_eye else R.drawable.ic_closed_eye
+                val iconId = if (passwordVisible) R.drawable.ic_closed_eye else R.drawable.ic_open_eye
                 val description =
                     if (passwordVisible) "Ocultar contraseña" else "Mostrar contraseña"
                 IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -119,19 +118,18 @@ fun LoginScreen() {
                 }
             }
         )
-        Column(Modifier.align(Alignment.End).padding(end = 70.dp)) {
-            TextInstruccions("Olvide mi contraseña", 18.sp)
+        Column(Modifier.align(Alignment.End)) {
+            TextInstruccions("Olvide mi contraseña", 18.sp, Modifier.padding(end = 50.dp))
         }
         Spacer(modifier = Modifier.height(60.dp))
         ButtonLog("Entrar")
-        TextInstruccions("¿Eres nuevo por aqui? Registrate",20.sp, Modifier.padding(10.dp))
-        Spacer(modifier = Modifier.weight(1f))
-
+        TextInstruccions("¿Eres nuevo por aqui? Registrate", 20.sp, Modifier.padding(10.dp))
+        Spacer(modifier = Modifier.height(50.dp))
     }
 }
 
 @Composable
-fun TextInstruccions(text: String, size: TextUnit,modifier: Modifier = Modifier) {
+fun TextInstruccions(text: String, size: TextUnit, modifier: Modifier = Modifier) {
     Text(
         text = text,
         fontFamily = alegreyaFont,
@@ -148,30 +146,25 @@ fun ButtonLog(text: String) {
         modifier = Modifier
             .height(62.dp)
             .width(237.dp),
-        onClick = {}, shape = RoundedCornerShape(54.dp),
+        onClick = {},
+        shape = RoundedCornerShape(54.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color(0xFF371B34), // Color de fondo más suave
+            containerColor = Color(0xFF371B34),
             contentColor = Color.White,
         ),
-
-
-        ) {
+    ) {
         Text(text, fontFamily = alegreyaFont, fontSize = 25.sp, fontWeight = FontWeight.Medium)
     }
-
 }
 
 @Composable
 fun TextField(
     value: String,
     onValueChange: (String) -> Unit,
-
-
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     visualTransformation: VisualTransformation = VisualTransformation.None,
-
     fontFamily: FontFamily
 ) {
     val textStyle = TextStyle(
@@ -186,7 +179,6 @@ fun TextField(
         focusedContainerColor = creamBackground,
         focusedIndicatorColor = Color.Black,
         focusedTrailingIconColor = blackPurple,
-
         unfocusedIndicatorColor = Color.Black,
         unfocusedContainerColor = creamBackground,
         unfocusedLeadingIconColor = blackPurple,
@@ -195,21 +187,16 @@ fun TextField(
     OutlinedTextField(
         value = value,
         onValueChange = onValueChange,
-
-
         leadingIcon = leadingIcon,
         trailingIcon = trailingIcon,
         singleLine = true,
         textStyle = textStyle,
-
-
         keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
         visualTransformation = visualTransformation,
-
         shape = RoundedCornerShape(20.dp),
-        colors = colors
+        colors = colors,
+        modifier = Modifier.width(280.dp)
     )
-
 }
 
 @Composable
@@ -217,4 +204,3 @@ fun TextField(
 fun LoginScreenView() {
     LoginScreen()
 }
-
