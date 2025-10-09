@@ -52,7 +52,7 @@ fun LoginView(navHostController: NavHostController) {
 @Composable
 fun LogoImage(size: Dp) {
     Image(
-        painter = painterResource(R.drawable.logo_yollotl),
+        painter = painterResource(R.drawable.yollotl_logo),
         contentDescription = "Logo",
         modifier = Modifier.size(size)
     )
@@ -62,16 +62,24 @@ fun LogoImage(size: Dp) {
 @Composable
 fun ButtonLogin(navHostController: NavHostController) {
     Button(
-        modifier = Modifier.height(62.dp).width(237.dp),
-        onClick = {navHostController.navigate(AppScreens.LoginScreen.route)}, shape = RoundedCornerShape(54.dp),
+        modifier = Modifier
+            .height(62.dp)
+            .width(237.dp),
+        onClick = { navHostController.navigate(AppScreens.LoginScreen.route) },
+        shape = RoundedCornerShape(54.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF371B34), // Color de fondo más suave
             contentColor = Color.White,
         ),
 
 
-    ) {
-        Text("Abrir el corazón", fontFamily = alegreyaFont, fontSize = 25.sp, fontWeight = FontWeight.Medium)
+        ) {
+        Text(
+            "Abrir el corazón",
+            fontFamily = alegreyaFont,
+            fontSize = 25.sp,
+            fontWeight = FontWeight.Medium
+        )
     }
 
 }
